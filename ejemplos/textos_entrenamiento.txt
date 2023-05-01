@@ -1,0 +1,7 @@
+Esto es un texto de prueba para el sistema recomendador
+Máster en Ciberseguridad e Inteligencia de datos, asignatura Técnicas Avanzadas de Análisis de Datos 
+Estudio en la Universidad de La Laguna
+Soy programador web en una empresa de desarrollo de aplicaciones 
+Soy graduado en Ingeniería Informática
+Esta práctica es de sistemas recomendadores para la asignatura Técnicas Avanzadas de Análisis de Datos
+He programado esta aplicación siendo estudiante de informática
