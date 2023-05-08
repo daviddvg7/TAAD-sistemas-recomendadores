@@ -63,14 +63,22 @@ def calculate_tfidf(docs):
         tf = {}
         for word in doc:
             tf[word] = tf.get(word, 0) + 1
+        for word in tf:
+           tf[word] = tf[word] / len(doc)
         tfs.append(tf)
 
     # Calculamos la frecuencia inversa de documento (IDF) para cada término
     N = len(docs)
+    idf = {}
     idfs = {}
     for doc in docs:
+        idf = {}
         for word in doc:
+            idf[word] = idf.get(word, 0) + 1
+            
+        for word in idf:
             idfs[word] = idfs.get(word, 0) + 1
+              
     for word in idfs:
         idfs[word] = log(N / idfs[word])
 
@@ -110,8 +118,7 @@ def calculate_tfidf(docs):
     for matriz in listado_matrices_documentos:
         prueba = pd.DataFrame(matriz, columns=['Índice del término', 'Término', 'TF', 'IDF', 'TF-IDF'])
         dfs_termino_valores.append(prueba)
-
-    
+  
     return df_tfidf, dfs_termino_valores
 
 
@@ -119,6 +126,14 @@ def calculate_tfidf(docs):
 def similitud_coseno(df):
     # Calcular la matriz de similitud del coseno
     sim_matrix = cosine_similarity(df)
+    # Crear un dataframe con la matriz de similitud del coseno
+    sim_df = pd.DataFrame(sim_matrix)
+    return sim_df
+
+# Función que calcula la similitud del coseno entre los documentos de 2 matrices
+def similitud_coseno_entre_matrices(df1, df2):
+    # Calcular la matriz de similitud del coseno
+    sim_matrix = cosine_similarity(df1, df2)
     # Crear un dataframe con la matriz de similitud del coseno
     sim_df = pd.DataFrame(sim_matrix)
     return sim_df
@@ -142,13 +157,6 @@ def igualar_dimensiones_matrices(df1, df2):
   return df1, df2
 
 
-# Función que calcula la similitud del coseno entre los documentos de 2 matrices
-def similitud_coseno_entre_matrices(df1, df2):
-    # Calcular la matriz de similitud del coseno
-    sim_matrix = cosine_similarity(df1, df2)
-    # Crear un dataframe con la matriz de similitud del coseno
-    sim_df = pd.DataFrame(sim_matrix)
-    return sim_df
 
 # Esta función recibe la matriz de similitud del coseno entre el conjunto de documentos de entrenamiento y el 
 # conjunto de documentos a recomendar, además de un número de recomendaciones a realizar. Devuelve un array 
